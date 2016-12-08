@@ -1,6 +1,6 @@
 # resin-nodered-kitracom
 
-a node-red application with [resin-supervisor](https://docs.resin.io/runtime/supervisor-api/),  [Kitracom](https://github.com/rushup/kitra/wiki/Kitra-COM) and [artik cloud](https://artik.cloud/) flows, can be managed remotely via resin.io publicURL
+a node-red application with [resin-supervisor](https://docs.resin.io/runtime/supervisor-api/),  [Kitracom](https://github.com/rushup/kitra/wiki/Kitra-COM) and [artik cloud](https://artik.cloud/) flows, can be managed remotely via resin.io [publicURL](https://docs.resin.io/management/devices/#enable-public-device-url)
 
 ## Configure via [environment variables](https://docs.resin.io/management/env-vars/)
 Variable Name | Default | Description
