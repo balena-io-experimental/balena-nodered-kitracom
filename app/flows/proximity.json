@@ -1,0 +1,184 @@
+[{
+    "id": "676bdc9f.9fda04",
+    "type": "tab",
+    "label": "Proximity"
+}, {
+    "id": "d917a034.a2ad1",
+    "type": "prox_lux_get_prox",
+    "z": "676bdc9f.9fda04",
+    "name": "",
+    "x": 413,
+    "y": 460.72222900390625,
+    "wires": [
+        ["92e6840f.0a98b8"]
+    ]
+}, {
+    "id": "a20672ef.67c76",
+    "type": "prox_lux_read_prox",
+    "z": "676bdc9f.9fda04",
+    "name": "",
+    "pin": "1",
+    "x": 465,
+    "y": 321.5,
+    "wires": [
+        ["b714f624.d8f878"]
+    ]
+}, {
+    "id": "b714f624.d8f878",
+    "type": "serial out",
+    "z": "676bdc9f.9fda04",
+    "name": "",
+    "serial": "917aea9d.3c6698",
+    "x": 762,
+    "y": 325.5,
+    "wires": []
+}, {
+    "id": "36eed8c3.6dd298",
+    "type": "prox_lux_configure",
+    "z": "676bdc9f.9fda04",
+    "name": "",
+    "pin": "2",
+    "disable_lux": "true",
+    "disable_prox": "false",
+    "extended_range": "3",
+    "x": 464,
+    "y": 250.5,
+    "wires": [
+        ["b714f624.d8f878"]
+    ]
+}, {
+    "id": "d0ffcb16.faa4d8",
+    "type": "prox_lux_configure",
+    "z": "676bdc9f.9fda04",
+    "name": "",
+    "pin": "1",
+    "disable_lux": "true",
+    "disable_prox": "false",
+    "extended_range": "3",
+    "x": 461,
+    "y": 203.5,
+    "wires": [
+        ["b714f624.d8f878"]
+    ]
+}, {
+    "id": "92e6840f.0a98b8",
+    "type": "function",
+    "z": "676bdc9f.9fda04",
+    "name": "CLOUD CONFIG",
+    "func": "msg.payload = msg.payload;\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 656,
+    "y": 461.5,
+    "wires": [
+        ["3f3dee38.b21862"]
+    ]
+}, {
+    "id": "442000f6.371f",
+    "type": "prox_lux_enable",
+    "z": "676bdc9f.9fda04",
+    "name": "",
+    "pin": 1,
+    "enabled": "true",
+    "x": 447,
+    "y": 144,
+    "wires": [
+        ["b714f624.d8f878"]
+    ]
+}, {
+    "id": "9739a651.47f3a8",
+    "type": "inject",
+    "z": "676bdc9f.9fda04",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 208,
+    "y": 154,
+    "wires": [
+        ["442000f6.371f"]
+    ]
+}, {
+    "id": "eff84ec5.31fb6",
+    "type": "inject",
+    "z": "676bdc9f.9fda04",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 212,
+    "y": 227,
+    "wires": [
+        ["d0ffcb16.faa4d8", "36eed8c3.6dd298"]
+    ]
+}, {
+    "id": "920bac4c.84657",
+    "type": "inject",
+    "z": "676bdc9f.9fda04",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "1",
+    "crontab": "",
+    "once": false,
+    "x": 219,
+    "y": 329,
+    "wires": [
+        ["a20672ef.67c76"]
+    ]
+}, {
+    "id": "34e0011c.cd7abe",
+    "type": "serial in",
+    "z": "676bdc9f.9fda04",
+    "name": "",
+    "serial": "c37af095.f17b",
+    "x": 206,
+    "y": 459,
+    "wires": [
+        ["d917a034.a2ad1"]
+    ]
+}, {
+    "id": "3f3dee38.b21862",
+    "type": "debug",
+    "z": "676bdc9f.9fda04",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 877,
+    "y": 462,
+    "wires": []
+}, {
+    "id": "917aea9d.3c6698",
+    "type": "serial-port",
+    "z": "676bdc9f.9fda04",
+    "serialport": "/dev/ttySAC3",
+    "serialbaud": "115200",
+    "databits": "8",
+    "parity": "none",
+    "stopbits": "1",
+    "newline": "\\n",
+    "bin": "false",
+    "out": "char",
+    "addchar": false
+}, {
+    "id": "c37af095.f17b",
+    "type": "serial-port",
+    "z": "676bdc9f.9fda04",
+    "serialport": "/dev/ttySAC3",
+    "serialbaud": "9600",
+    "databits": "8",
+    "parity": "none",
+    "stopbits": "1",
+    "newline": "\\n",
+    "bin": "false",
+    "out": "char",
+    "addchar": false
+}]

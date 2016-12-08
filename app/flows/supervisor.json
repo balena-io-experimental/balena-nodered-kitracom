@@ -1,0 +1,91 @@
+[
+    {
+        "id": "5e6d0d87.ebda04",
+        "type": "tab",
+        "label": "Supervisor"
+    },
+    {
+        "id": "41f1a51c.17a46c",
+        "type": "inject",
+        "z": "5e6d0d87.ebda04",
+        "name": "Poll",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "x": 145,
+        "y": 276.5,
+        "wires": [
+            [
+                "c795b729.bc95c8"
+            ]
+        ]
+    },
+    {
+        "id": "c795b729.bc95c8",
+        "type": "function",
+        "z": "5e6d0d87.ebda04",
+        "name": "supervisor",
+        "func": "return {payload: context.global.process.env.RESIN_SUPERVISOR_ADDRESS+'/v1/device?apikey='+context.global.process.env.RESIN_SUPERVISOR_API_KEY};",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 343,
+        "y": 277,
+        "wires": [
+            [
+                "2d277151.bc2ede"
+            ]
+        ]
+    },
+    {
+        "id": "2d277151.bc2ede",
+        "type": "http request",
+        "z": "5e6d0d87.ebda04",
+        "name": "Device state",
+        "method": "GET",
+        "ret": "obj",
+        "url": "{{{payload}}}",
+        "tls": "",
+        "x": 568,
+        "y": 277,
+        "wires": [
+            [
+                "ca6210cb.bf54"
+            ]
+        ]
+    },
+    {
+        "id": "ca6210cb.bf54",
+        "type": "debug",
+        "z": "5e6d0d87.ebda04",
+        "name": "Device state log",
+        "active": true,
+        "console": "true",
+        "complete": "payload",
+        "x": 779,
+        "y": 211.5,
+        "wires": []
+    },
+    {
+        "id": "4d432a40.bf4774",
+        "type": "comment",
+        "z": "5e6d0d87.ebda04",
+        "name": "Poll device state",
+        "info": "",
+        "x": 159,
+        "y": 220.5,
+        "wires": []
+    },
+    {
+        "id": "3b30f6d2.91fd8a",
+        "type": "comment",
+        "z": "5e6d0d87.ebda04",
+        "name": "debug note",
+        "info": "lin \"Device state log\" green debug block to the \"Device state\" function block to get the full device state output in the debug pane on the right",
+        "x": 802,
+        "y": 172.5,
+        "wires": []
+    }
+]
