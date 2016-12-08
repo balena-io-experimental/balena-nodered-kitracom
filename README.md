@@ -1,6 +1,6 @@
 # resin-nodered-kitracom
 
-a node-red application with supervisor and kitracom flows, can be managed remotely via resin.io publicURL
+a node-red application with supervisor and [Kitracom](https://github.com/rushup/kitra/wiki/Kitra-COM) flows, can be managed remotely via resin.io publicURL
 
 ## Configure via [environment variables](https://docs.resin.io/management/env-vars/)
 Variable Name | Default | Description
