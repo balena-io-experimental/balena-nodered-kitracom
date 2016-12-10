@@ -27,7 +27,7 @@ COPY ./app/package.json ./
 
 # This install npm dependencies on the resin.io build server,
 # making sure to clean up the artifacts it creates in order to reduce the image size.
-RUN JOBS=MAX npm install --production --unsafe-perm && npm install -g node-red && npm install -g node-red-contrib-kitra install node-red-contrib-artik node-red-contrib-artik-cloud && npm cache clean && rm -rf /tmp/*
+RUN JOBS=MAX npm install --production --unsafe-perm && npm install -g node-red && npm install -g node-red-contrib-kitra install node-red-contrib-artik node-red-contrib-artik-cloud node-red-contrib-resinio && npm cache clean && rm -rf /tmp/*
 
 # This will copy all files in our root to the working  directory in the container
 COPY ./app ./
