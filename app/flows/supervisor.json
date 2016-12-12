@@ -1,91 +1,180 @@
-[
-    {
-        "id": "5e6d0d87.ebda04",
-        "type": "tab",
-        "label": "Supervisor"
-    },
-    {
-        "id": "41f1a51c.17a46c",
-        "type": "inject",
-        "z": "5e6d0d87.ebda04",
-        "name": "Poll",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "5",
-        "crontab": "",
-        "once": false,
-        "x": 145,
-        "y": 276.5,
-        "wires": [
-            [
-                "c795b729.bc95c8"
-            ]
-        ]
-    },
-    {
-        "id": "c795b729.bc95c8",
-        "type": "function",
-        "z": "5e6d0d87.ebda04",
-        "name": "supervisor",
-        "func": "return {payload: context.global.process.env.RESIN_SUPERVISOR_ADDRESS+'/v1/device?apikey='+context.global.process.env.RESIN_SUPERVISOR_API_KEY};",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 343,
-        "y": 277,
-        "wires": [
-            [
-                "2d277151.bc2ede"
-            ]
-        ]
-    },
-    {
-        "id": "2d277151.bc2ede",
-        "type": "http request",
-        "z": "5e6d0d87.ebda04",
-        "name": "Device state",
-        "method": "GET",
-        "ret": "obj",
-        "url": "{{{payload}}}",
-        "tls": "",
-        "x": 568,
-        "y": 277,
-        "wires": [
-            [
-                "ca6210cb.bf54"
-            ]
-        ]
-    },
-    {
-        "id": "ca6210cb.bf54",
-        "type": "debug",
-        "z": "5e6d0d87.ebda04",
-        "name": "Device state log",
-        "active": true,
-        "console": "true",
-        "complete": "payload",
-        "x": 779,
-        "y": 211.5,
-        "wires": []
-    },
-    {
-        "id": "4d432a40.bf4774",
-        "type": "comment",
-        "z": "5e6d0d87.ebda04",
-        "name": "Poll device state",
-        "info": "",
-        "x": 159,
-        "y": 220.5,
-        "wires": []
-    },
-    {
-        "id": "3b30f6d2.91fd8a",
-        "type": "comment",
-        "z": "5e6d0d87.ebda04",
-        "name": "debug note",
-        "info": "lin \"Device state log\" green debug block to the \"Device state\" function block to get the full device state output in the debug pane on the right",
-        "x": 802,
-        "y": 172.5,
-        "wires": []
-    }
-]
+[{
+    "id": "122edfb2.46212",
+    "type": "inject",
+    "z": "bb84a7a2.4b7e28",
+    "name": "Poll interval",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "2",
+    "crontab": "",
+    "once": true,
+    "x": 150,
+    "y": 247,
+    "wires": [
+        ["aa00fea7.ebda4"]
+    ]
+}, {
+    "id": "a319d149.5cf23",
+    "type": "serial out",
+    "z": "bb84a7a2.4b7e28",
+    "name": "Kitracom",
+    "serial": "f9860b6.b7363f8",
+    "x": 1100,
+    "y": 247,
+    "wires": []
+}, {
+    "id": "aa00fea7.ebda4",
+    "type": "device",
+    "z": "bb84a7a2.4b7e28",
+    "name": "device state",
+    "x": 370,
+    "y": 247,
+    "wires": [
+        ["6bfee6a0.5cc018"]
+    ]
+}, {
+    "id": "2ebb3ffa.72768",
+    "type": "inject",
+    "z": "bb84a7a2.4b7e28",
+    "name": "Push me first",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 150,
+    "y": 100,
+    "wires": [
+        ["749b902.6fae87"]
+    ]
+}, {
+    "id": "749b902.6fae87",
+    "type": "led_rgb_enable",
+    "z": "bb84a7a2.4b7e28",
+    "name": "Enable LED",
+    "pin": "1",
+    "enabled": "true",
+    "x": 370,
+    "y": 100,
+    "wires": [
+        ["812dd8d0.d1ba38"]
+    ]
+}, {
+    "id": "812dd8d0.d1ba38",
+    "type": "serial out",
+    "z": "bb84a7a2.4b7e28",
+    "name": "Kitracom",
+    "serial": "f9860b6.b7363f8",
+    "x": 600,
+    "y": 100,
+    "wires": []
+}, {
+    "id": "9b4dd7bd.5876e8",
+    "type": "comment",
+    "z": "bb84a7a2.4b7e28",
+    "name": "Enable LED 1",
+    "info": "",
+    "x": 150,
+    "y": 60,
+    "wires": []
+}, {
+    "id": "6bfee6a0.5cc018",
+    "type": "switch",
+    "z": "bb84a7a2.4b7e28",
+    "name": "Idle or Downloading",
+    "property": "payload.status",
+    "propertyType": "msg",
+    "rules": [{
+        "t": "eq",
+        "v": "Idle",
+        "vt": "str"
+    }, {
+        "t": "eq",
+        "v": "Downloading",
+        "vt": "str"
+    }],
+    "checkall": "true",
+    "outputs": 2,
+    "x": 600,
+    "y": 247,
+    "wires": [
+        ["767e224a.d00e7c"],
+        ["512cf977.4bdc68", "55a9e230.0baa4c"]
+    ]
+}, {
+    "id": "767e224a.d00e7c",
+    "type": "led_rgb_set",
+    "z": "bb84a7a2.4b7e28",
+    "name": "Idle, set LED 1 green",
+    "pin": "1",
+    "color": "00ff00",
+    "intensity": "10",
+    "autostart": "true",
+    "x": 840,
+    "y": 220,
+    "wires": [
+        ["a319d149.5cf23"]
+    ]
+}, {
+    "id": "512cf977.4bdc68",
+    "type": "led_rgb_set",
+    "z": "bb84a7a2.4b7e28",
+    "name": "Downloading, set LED 1 blue",
+    "pin": "1",
+    "color": "4568A3",
+    "intensity": "10",
+    "autostart": "true",
+    "x": 860,
+    "y": 287,
+    "wires": [
+        ["a319d149.5cf23"]
+    ]
+}, {
+    "id": "eff9945b.a86528",
+    "type": "comment",
+    "z": "bb84a7a2.4b7e28",
+    "name": "Use LED 1 to show device state (Idle or Downloading)",
+    "info": "",
+    "x": 280,
+    "y": 207,
+    "wires": []
+}, {
+    "id": "1f71bcf8.8197a3",
+    "type": "debug",
+    "z": "bb84a7a2.4b7e28",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "payload",
+    "x": 1070,
+    "y": 360,
+    "wires": []
+}, {
+    "id": "55a9e230.0baa4c",
+    "type": "function",
+    "z": "bb84a7a2.4b7e28",
+    "name": "Prepare Download progress msg",
+    "func": "var newMsg = {\n    payload: \"Download progress: \" + msg.payload.download_progress + \"%\"\n};\nreturn newMsg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 800,
+    "y": 360,
+    "wires": [
+        ["1f71bcf8.8197a3"]
+    ]
+}, {
+    "id": "f9860b6.b7363f8",
+    "type": "serial-port",
+    "z": "",
+    "serialport": "/dev/ttySAC3",
+    "serialbaud": "115200",
+    "databits": "8",
+    "parity": "none",
+    "stopbits": "1",
+    "newline": "\\n",
+    "bin": "false",
+    "out": "char",
+    "addchar": false
+}]
