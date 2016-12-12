@@ -1,6 +1,6 @@
 {
   "name": "nodered-kitra",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "dependencies": {
     "node-red": "^0.15.2",
     "node-red-contrib-artik": "0.0.12",
