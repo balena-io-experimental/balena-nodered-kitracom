@@ -24,9 +24,12 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir -p /usr/src/app/
 WORKDIR /usr/src/app
 
+# Update setup-tools
+RUN curl https://bootstrap.pypa.io/ez_setup.py -o - | python
+
 # Install nrfutil extension
 RUN cd /usr/src/app && git clone https://github.com/NordicSemiconductor/pc-nrfutil.git && \
-  git checkout 0_5_2 && python setup.py install
+  git checkout 0_5_2 && pip install -r requirements.txt && python setup.py install
 
 # Copies the package.json first for better cache on later pushes
 COPY ./app/package.json ./
