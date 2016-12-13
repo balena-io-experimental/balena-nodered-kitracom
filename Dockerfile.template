@@ -28,7 +28,7 @@ WORKDIR /usr/src/app
 RUN curl https://bootstrap.pypa.io/ez_setup.py -o - | python
 
 # Install nrfutil extension
-RUN cd /usr/src/app && git clone https://github.com/NordicSemiconductor/pc-nrfutil && \
+RUN cd /usr/src/app && git clone https://github.com/NordicSemiconductor/pc-nrfutil nrfutil && \
   git checkout 0_5_2 && pip install -r requirements.txt && python setup.py install
 
 # Copies the package.json first for better cache on later pushes
