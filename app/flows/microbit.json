@@ -1,0 +1,329 @@
+[{
+    "id": "c104b867.e228b8",
+    "type": "http request",
+    "z": "4719a036.2d961",
+    "name": "Discovery ON",
+    "method": "POST",
+    "ret": "txt",
+    "url": "127.0.0.1:3000/v1/discovery",
+    "tls": "",
+    "x": 420,
+    "y": 80,
+    "wires": [
+        ["d7291b0f.f4bfb8"]
+    ]
+}, {
+    "id": "20198ea7.b67da2",
+    "type": "inject",
+    "z": "4719a036.2d961",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 110,
+    "y": 80,
+    "wires": [
+        ["c104b867.e228b8"]
+    ]
+}, {
+    "id": "d7291b0f.f4bfb8",
+    "type": "debug",
+    "z": "4719a036.2d961",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 770,
+    "y": 80,
+    "wires": []
+}, {
+    "id": "c6aba55c.9a48a8",
+    "type": "http request",
+    "z": "4719a036.2d961",
+    "name": "Discovery OFF",
+    "method": "DELETE",
+    "ret": "txt",
+    "url": "127.0.0.1:3000/v1/discovery",
+    "tls": "",
+    "x": 420,
+    "y": 140,
+    "wires": [
+        ["4e5c0949.ebeea8"]
+    ]
+}, {
+    "id": "b204ce81.dfb95",
+    "type": "inject",
+    "z": "4719a036.2d961",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 110,
+    "y": 140,
+    "wires": [
+        ["c6aba55c.9a48a8"]
+    ]
+}, {
+    "id": "4e5c0949.ebeea8",
+    "type": "debug",
+    "z": "4719a036.2d961",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 770,
+    "y": 140,
+    "wires": []
+}, {
+    "id": "a61726a3.e27158",
+    "type": "http request",
+    "z": "4719a036.2d961",
+    "name": "List Devices",
+    "method": "GET",
+    "ret": "txt",
+    "url": "127.0.0.1:3000/v1/devices",
+    "tls": "",
+    "x": 410,
+    "y": 200,
+    "wires": [
+        ["59effd7.c7a3004"]
+    ]
+}, {
+    "id": "71f1770a.70e448",
+    "type": "inject",
+    "z": "4719a036.2d961",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 110,
+    "y": 200,
+    "wires": [
+        ["a61726a3.e27158"]
+    ]
+}, {
+    "id": "59effd7.c7a3004",
+    "type": "debug",
+    "z": "4719a036.2d961",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 770,
+    "y": 200,
+    "wires": []
+}, {
+    "id": "dfc7a361.427ec",
+    "type": "http request",
+    "z": "4719a036.2d961",
+    "name": "Connect",
+    "method": "POST",
+    "ret": "txt",
+    "url": "127.0.0.1:3000/v1/devices/e4e3379dba1b",
+    "tls": "",
+    "x": 400,
+    "y": 260,
+    "wires": [
+        ["449557d5.5ef1c8"]
+    ]
+}, {
+    "id": "13582589.2e7daa",
+    "type": "inject",
+    "z": "4719a036.2d961",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 110,
+    "y": 260,
+    "wires": [
+        ["dfc7a361.427ec"]
+    ]
+}, {
+    "id": "449557d5.5ef1c8",
+    "type": "debug",
+    "z": "4719a036.2d961",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 770,
+    "y": 260,
+    "wires": []
+}, {
+    "id": "5dace25b.bedb7c",
+    "type": "http request",
+    "z": "4719a036.2d961",
+    "name": "Write string",
+    "method": "POST",
+    "ret": "txt",
+    "url": "127.0.0.1:3000/v1/text/e4e3379dba1b/KITRACOM ON RESIN.IO",
+    "tls": "",
+    "x": 410,
+    "y": 320,
+    "wires": [
+        ["9e3076b5.1eeab8"]
+    ]
+}, {
+    "id": "1ac75ffc.883f9",
+    "type": "inject",
+    "z": "4719a036.2d961",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 110,
+    "y": 320,
+    "wires": [
+        ["5dace25b.bedb7c"]
+    ]
+}, {
+    "id": "9e3076b5.1eeab8",
+    "type": "debug",
+    "z": "4719a036.2d961",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 770,
+    "y": 320,
+    "wires": []
+}, {
+    "id": "97562817.095098",
+    "type": "http request",
+    "z": "4719a036.2d961",
+    "name": "Read temperature",
+    "method": "GET",
+    "ret": "txt",
+    "url": "127.0.0.1:3000/v1/temperature/e4e3379dba1b",
+    "tls": "",
+    "x": 430,
+    "y": 380,
+    "wires": [
+        ["7f087f0f.2e8"]
+    ]
+}, {
+    "id": "8e16df1b.0ae67",
+    "type": "inject",
+    "z": "4719a036.2d961",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 110,
+    "y": 380,
+    "wires": [
+        ["97562817.095098"]
+    ]
+}, {
+    "id": "7f087f0f.2e8",
+    "type": "debug",
+    "z": "4719a036.2d961",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 770,
+    "y": 380,
+    "wires": []
+}, {
+    "id": "e5f9be1f.7c142",
+    "type": "http request",
+    "z": "4719a036.2d961",
+    "name": "Read accelerometer",
+    "method": "GET",
+    "ret": "txt",
+    "url": "127.0.0.1:3000/v1/accelerometer/e4e3379dba1b",
+    "tls": "",
+    "x": 440,
+    "y": 440,
+    "wires": [
+        ["6edbf60d.73a098"]
+    ]
+}, {
+    "id": "4c7b9cbc.9f1474",
+    "type": "inject",
+    "z": "4719a036.2d961",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 110,
+    "y": 440,
+    "wires": [
+        ["e5f9be1f.7c142"]
+    ]
+}, {
+    "id": "6edbf60d.73a098",
+    "type": "debug",
+    "z": "4719a036.2d961",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 770,
+    "y": 440,
+    "wires": []
+}, {
+    "id": "e03c0378.5bc2",
+    "type": "http request",
+    "z": "4719a036.2d961",
+    "name": "Disconnect",
+    "method": "DELETE",
+    "ret": "txt",
+    "url": "127.0.0.1:3000/v1/devices/e4e3379dba1b",
+    "tls": "",
+    "x": 410,
+    "y": 500,
+    "wires": [
+        ["3ab0daa7.5a6f26"]
+    ]
+}, {
+    "id": "8b1d4dcc.b2ac2",
+    "type": "inject",
+    "z": "4719a036.2d961",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 110,
+    "y": 500,
+    "wires": [
+        ["e03c0378.5bc2"]
+    ]
+}, {
+    "id": "3ab0daa7.5a6f26",
+    "type": "debug",
+    "z": "4719a036.2d961",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 770,
+    "y": 500,
+    "wires": []
+}]
