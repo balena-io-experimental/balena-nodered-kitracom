@@ -39,6 +39,7 @@ WORKDIR /usr/src/app/bluez-5.43
 RUN ./configure --enable-library \
     && make -j8 && sudo make install \
     && cp attrib/gatttool /usr/local/bin/
+WORKDIR /usr/src/app/
 
 # Copies the package.json first for better cache on later pushes
 COPY ./app/package.json ./
