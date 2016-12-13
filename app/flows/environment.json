@@ -1,150 +1,129 @@
-[
-    {
-        "id": "753d773e.77f6f8",
-        "type": "serial out",
-        "z": "fe69d92d.b84468",
-        "name": "",
-        "serial": "d5a5a1c6.e666",
-        "x": 657,
-        "y": 121.5,
-        "wires": []
-    },
-    {
-        "id": "b79b2dd.41ba9d",
-        "type": "inject",
-        "z": "fe69d92d.b84468",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "x": 170,
-        "y": 90,
-        "wires": [
-            [
-                "e5e3c297.2b561"
-            ]
-        ]
-    },
-    {
-        "id": "e5e3c297.2b561",
-        "type": "env_enable",
-        "z": "fe69d92d.b84468",
-        "name": "",
-        "enabled": "true",
-        "pressure": "true",
-        "temperature": "true",
-        "humidity": "false",
-        "lux": "true",
-        "x": 332,
-        "y": 93,
-        "wires": [
-            [
-                "753d773e.77f6f8"
-            ]
-        ]
-    },
-    {
-        "id": "b71b5632.829538",
-        "type": "env_read",
-        "z": "fe69d92d.b84468",
-        "name": "",
-        "x": 327,
-        "y": 165,
-        "wires": [
-            [
-                "753d773e.77f6f8"
-            ]
-        ]
-    },
-    {
-        "id": "adf93a3c.e0b868",
-        "type": "inject",
-        "z": "fe69d92d.b84468",
-        "name": "",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "repeat": "3",
-        "crontab": "",
-        "once": false,
-        "x": 175,
-        "y": 162,
-        "wires": [
-            [
-                "b71b5632.829538"
-            ]
-        ]
-    },
-    {
-        "id": "8fd33958.574fe8",
-        "type": "serial in",
-        "z": "fe69d92d.b84468",
-        "name": "",
-        "serial": "d5a5a1c6.e666",
-        "x": 147,
-        "y": 247.5,
-        "wires": [
-            [
-                "13fefb92.04cd84"
-            ]
-        ]
-    },
-    {
-        "id": "13fefb92.04cd84",
-        "type": "env_notification_catch",
-        "z": "fe69d92d.b84468",
-        "name": "",
-        "x": 370,
-        "y": 245.5,
-        "wires": [
-            [
-                "1b8bc6e5.b216f9"
-            ]
-        ]
-    },
-    {
-        "id": "1b8bc6e5.b216f9",
-        "type": "function",
-        "z": "fe69d92d.b84468",
-        "name": "Environment reading",
-        "func": "msg.payload = {\n \"temp\": msg.temperature,\n \"lux\": msg.lux,\n \"pressure\": msg.pressure\n};\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "x": 621,
-        "y": 245.5,
-        "wires": [
-            [
-                "14de18a4.5e41b7"
-            ]
-        ]
-    },
-    {
-        "id": "14de18a4.5e41b7",
-        "type": "debug",
-        "z": "fe69d92d.b84468",
-        "name": "Print data",
-        "active": true,
-        "console": "false",
-        "complete": "payload",
-        "x": 834,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "d5a5a1c6.e666",
-        "type": "serial-port",
-        "z": "fe69d92d.b84468",
-        "serialport": "/dev/ttySAC3",
-        "serialbaud": "115200",
-        "databits": "8",
-        "parity": "none",
-        "stopbits": "1",
-        "newline": "\\n",
-        "bin": "false",
-        "out": "char",
-        "addchar": false
-    }
-]
+[{
+    "id": "515721db.a08aa",
+    "type": "tab",
+    "label": "Environment"
+}, {
+    "id": "e62d2957.dc7ac8",
+    "type": "serial out",
+    "z": "515721db.a08aa",
+    "name": "",
+    "serial": "a142e8eb.6d7f68",
+    "x": 724,
+    "y": 207,
+    "wires": []
+}, {
+    "id": "1647d3e3.b85e8c",
+    "type": "inject",
+    "z": "515721db.a08aa",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 237,
+    "y": 175.5,
+    "wires": [
+        ["5f101c58.cd0144"]
+    ]
+}, {
+    "id": "5f101c58.cd0144",
+    "type": "env_enable",
+    "z": "515721db.a08aa",
+    "name": "",
+    "enabled": "true",
+    "pressure": "true",
+    "temperature": "true",
+    "humidity": "false",
+    "lux": "true",
+    "x": 399,
+    "y": 178.5,
+    "wires": [
+        ["e62d2957.dc7ac8"]
+    ]
+}, {
+    "id": "d69f9055.8574d",
+    "type": "env_read",
+    "z": "515721db.a08aa",
+    "name": "",
+    "x": 394,
+    "y": 250.5,
+    "wires": [
+        ["e62d2957.dc7ac8"]
+    ]
+}, {
+    "id": "c74f4cd4.31d56",
+    "type": "inject",
+    "z": "515721db.a08aa",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "20",
+    "crontab": "",
+    "once": false,
+    "x": 242,
+    "y": 247.5,
+    "wires": [
+        ["d69f9055.8574d"]
+    ]
+}, {
+    "id": "2c170b6c.938bb4",
+    "type": "serial in",
+    "z": "515721db.a08aa",
+    "name": "",
+    "serial": "a142e8eb.6d7f68",
+    "x": 214,
+    "y": 333,
+    "wires": [
+        ["360bb425.0b385c"]
+    ]
+}, {
+    "id": "360bb425.0b385c",
+    "type": "env_notification_catch",
+    "z": "515721db.a08aa",
+    "name": "",
+    "x": 437,
+    "y": 331,
+    "wires": [
+        ["eaa0e646.d42d98"]
+    ]
+}, {
+    "id": "eaa0e646.d42d98",
+    "type": "function",
+    "z": "515721db.a08aa",
+    "name": "env reading",
+    "func": " msg.payload =  \n {\n    \"temp\": msg.temperature,\n    \"lux\": msg.lux,\n    \"pressure\": msg.pressure\n     \n };\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 658,
+    "y": 331,
+    "wires": [
+        ["d2ef9217.e21e8"]
+    ]
+}, {
+    "id": "d2ef9217.e21e8",
+    "type": "debug",
+    "z": "515721db.a08aa",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 860,
+    "y": 336,
+    "wires": []
+}, {
+    "id": "a142e8eb.6d7f68",
+    "type": "serial-port",
+    "z": "515721db.a08aa",
+    "serialport": "/dev/ttySAC3",
+    "serialbaud": "115200",
+    "databits": "8",
+    "parity": "none",
+    "stopbits": "1",
+    "newline": "\\n",
+    "bin": "false",
+    "out": "char",
+    "addchar": false
+}]

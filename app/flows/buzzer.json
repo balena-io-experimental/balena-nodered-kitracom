@@ -1,1 +1,166 @@
-[{"id":"33e3f08c.02e64","type":"tab","label":"Buzzer (Happy Birthday)"},{"id":"d428962f.796868","type":"serial out","z":"33e3f08c.02e64","name":"","serial":"ecbde3e4.a5ba5","x":707,"y":255,"wires":[]},{"id":"5e22bac9.aaca64","type":"inject","z":"33e3f08c.02e64","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"x":274,"y":277.5,"wires":[["bea6a29e.5f662","4faefee8.12f96"]]},{"id":"bea6a29e.5f662","type":"buzz_enable","z":"33e3f08c.02e64","name":"","enabled":"true","x":469.5,"y":278.5,"wires":[["d428962f.796868"]]},{"id":"d8952906.fa5b28","type":"buzz_change","z":"33e3f08c.02e64","name":"","frequency":"","duty_cycle":"","use_toggle":"false","toggle":"200","x":634.5,"y":425.5,"wires":[["d428962f.796868"]]},{"id":"df53de86.b9d4a","type":"inject","z":"33e3f08c.02e64","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"x":259,"y":436.5,"wires":[["90c83737.f23438"]]},{"id":"4faefee8.12f96","type":"function","z":"33e3f08c.02e64","name":"INIT","func":"flow.set('notes', [\n/*Hap  py  Birth Day  to  you,  Hap py   birth day  to\nC4   C4   D4   C4   F4   E4   C4   C4   D4   C4   G4 */\n262, 262,294, 262,349, 330,262, 262, 294,262, 392,\n/*you, Hap py  Birth Day  dear  xxxx      Hap  py   birth\nF4   C4   C4   C5   A4   F4   E4   D4   B4b  B4b  A4 */\n349, 262, 262, 523, 440, 349, 330, 294, 466, 466, 440,\n/*day  to  you\nF4   G4   F4   */\n349, 392, 349]);\n\n\nflow.set('interval', [4, 4, 8, 8, 8, 10, 4, 4, 8, 8, 8, 10, 4, 4, 8, 8, 8,\n                             8, 8, 4, 4, 8, 8, 8, 12]);\n\nflow.set('index',0);\nflow.set('pause',0);\nflow.set('stop',0);\nreturn msg;","outputs":1,"noerr":0,"x":437,"y":350.5,"wires":[[]]},{"id":"90c83737.f23438","type":"function","z":"33e3f08c.02e64","name":"SET FREQ","func":"var index = flow.get('index');\nvar pause =  !flow.get('pause');\nvar stop =  flow.get('stop');\nvar interval;\nif(stop)\n    return null;\nif(!pause) \n    interval = 80; //commited a pause last time, how much wait before next note?\nelse if(!index)\n{\n    interval = 100*(flow.get('interval')[23]);\n    pause = 1;\n}\nelse\n    interval = 100*(flow.get('interval')[index-1]);\nif(pause)\n{\n    msg.buzz_frequency = 0;\n    msg.buzz_duty_cycle = 0;\n    flow.set('pause',pause);\n    setTimeout(function()\n    {\n        node.send(msg);\n    },interval);\n    return null;\n}\nelse\n    msg.buzz_duty_cycle = 50;\n\nmsg.buzz_frequency = flow.get('notes')[index];\nindex++;\nif(index > (24))\n    index = 0;\nflow.set('index',index);\nflow.set('pause',pause);\n\nsetTimeout(function()\n{\n    node.send(msg);\n},interval);\nreturn null;","outputs":1,"noerr":0,"x":454,"y":425.5,"wires":[["d8952906.fa5b28","d503db8c.5c9438"]]},{"id":"39b1f7d3.e55e78","type":"inject","z":"33e3f08c.02e64","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":true,"x":317,"y":152.5,"wires":[["47fb15c4.8f165c","421f3d67.b60304"]]},{"id":"47fb15c4.8f165c","type":"buzz_change","z":"33e3f08c.02e64","name":"","frequency":"0","duty_cycle":"50","use_toggle":"false","toggle":0,"x":490,"y":150,"wires":[["d428962f.796868"]]},{"id":"d503db8c.5c9438","type":"function","z":"33e3f08c.02e64","name":"LOOP","func":"\nreturn msg;","outputs":1,"noerr":0,"x":445,"y":512.5,"wires":[["90c83737.f23438"]]},{"id":"421f3d67.b60304","type":"function","z":"33e3f08c.02e64","name":"STOP","func":"\nflow.set('stop',1);\n","outputs":1,"noerr":0,"x":464,"y":197,"wires":[[]]},{"id":"ecbde3e4.a5ba5","type":"serial-port","z":"33e3f08c.02e64","serialport":"/dev/ttySAC3","serialbaud":"9600","databits":"8","parity":"none","stopbits":"1","newline":"\\n","bin":"false","out":"char","addchar":false}]
+[{
+    "id": "33e3f08c.02e64",
+    "type": "tab",
+    "label": "Buzzer (HBtY)"
+}, {
+    "id": "d428962f.796868",
+    "type": "serial out",
+    "z": "33e3f08c.02e64",
+    "name": "",
+    "serial": "ecbde3e4.a5ba5",
+    "x": 707,
+    "y": 255,
+    "wires": []
+}, {
+    "id": "5e22bac9.aaca64",
+    "type": "inject",
+    "z": "33e3f08c.02e64",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 274,
+    "y": 277.5,
+    "wires": [
+        ["bea6a29e.5f662", "4faefee8.12f96"]
+    ]
+}, {
+    "id": "bea6a29e.5f662",
+    "type": "buzz_enable",
+    "z": "33e3f08c.02e64",
+    "name": "",
+    "enabled": "true",
+    "x": 469.5,
+    "y": 278.5,
+    "wires": [
+        ["d428962f.796868"]
+    ]
+}, {
+    "id": "d8952906.fa5b28",
+    "type": "buzz_change",
+    "z": "33e3f08c.02e64",
+    "name": "",
+    "frequency": "",
+    "duty_cycle": "",
+    "use_toggle": "false",
+    "toggle": "200",
+    "x": 634.5,
+    "y": 425.5,
+    "wires": [
+        ["d428962f.796868"]
+    ]
+}, {
+    "id": "df53de86.b9d4a",
+    "type": "inject",
+    "z": "33e3f08c.02e64",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 259,
+    "y": 436.5,
+    "wires": [
+        ["90c83737.f23438"]
+    ]
+}, {
+    "id": "4faefee8.12f96",
+    "type": "function",
+    "z": "33e3f08c.02e64",
+    "name": "INIT",
+    "func": "flow.set('notes', [\n/*Hap  py  Birth Day  to  you,  Hap py   birth day  to\nC4   C4   D4   C4   F4   E4   C4   C4   D4   C4   G4 */\n262, 262,294, 262,349, 330,262, 262, 294,262, 392,\n/*you, Hap py  Birth Day  dear  xxxx      Hap  py   birth\nF4   C4   C4   C5   A4   F4   E4   D4   B4b  B4b  A4 */\n349, 262, 262, 523, 440, 349, 330, 294, 466, 466, 440,\n/*day  to  you\nF4   G4   F4   */\n349, 392, 349]);\n\n\nflow.set('interval', [4, 4, 8, 8, 8, 10, 4, 4, 8, 8, 8, 10, 4, 4, 8, 8, 8,\n                             8, 8, 4, 4, 8, 8, 8, 12]);\n\nflow.set('index',0);\nflow.set('pause',0);\nflow.set('stop',0);\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 437,
+    "y": 350.5,
+    "wires": [
+        []
+    ]
+}, {
+    "id": "90c83737.f23438",
+    "type": "function",
+    "z": "33e3f08c.02e64",
+    "name": "SET FREQ",
+    "func": "var index = flow.get('index');\nvar pause =  !flow.get('pause');\nvar stop =  flow.get('stop');\nvar interval;\nif(stop)\n    return null;\nif(!pause) \n    interval = 80; //commited a pause last time, how much wait before next note?\nelse if(!index)\n{\n    interval = 100*(flow.get('interval')[23]);\n    pause = 1;\n}\nelse\n    interval = 100*(flow.get('interval')[index-1]);\nif(pause)\n{\n    msg.buzz_frequency = 0;\n    msg.buzz_duty_cycle = 0;\n    flow.set('pause',pause);\n    setTimeout(function()\n    {\n        node.send(msg);\n    },interval);\n    return null;\n}\nelse\n    msg.buzz_duty_cycle = 50;\n\nmsg.buzz_frequency = flow.get('notes')[index];\nindex++;\nif(index > (24))\n    index = 0;\nflow.set('index',index);\nflow.set('pause',pause);\n\nsetTimeout(function()\n{\n    node.send(msg);\n},interval);\nreturn null;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 454,
+    "y": 425.5,
+    "wires": [
+        ["d8952906.fa5b28", "d503db8c.5c9438"]
+    ]
+}, {
+    "id": "39b1f7d3.e55e78",
+    "type": "inject",
+    "z": "33e3f08c.02e64",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": true,
+    "x": 317,
+    "y": 152.5,
+    "wires": [
+        ["47fb15c4.8f165c", "421f3d67.b60304"]
+    ]
+}, {
+    "id": "47fb15c4.8f165c",
+    "type": "buzz_change",
+    "z": "33e3f08c.02e64",
+    "name": "",
+    "frequency": "0",
+    "duty_cycle": "50",
+    "use_toggle": "false",
+    "toggle": 0,
+    "x": 490,
+    "y": 150,
+    "wires": [
+        ["d428962f.796868"]
+    ]
+}, {
+    "id": "d503db8c.5c9438",
+    "type": "function",
+    "z": "33e3f08c.02e64",
+    "name": "LOOP",
+    "func": "\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 445,
+    "y": 512.5,
+    "wires": [
+        ["90c83737.f23438"]
+    ]
+}, {
+    "id": "421f3d67.b60304",
+    "type": "function",
+    "z": "33e3f08c.02e64",
+    "name": "STOP",
+    "func": "\nflow.set('stop',1);\n",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 464,
+    "y": 197,
+    "wires": [
+        []
+    ]
+}, {
+    "id": "ecbde3e4.a5ba5",
+    "type": "serial-port",
+    "z": "33e3f08c.02e64",
+    "serialport": "/dev/ttySAC3",
+    "serialbaud": "9600",
+    "databits": "8",
+    "parity": "none",
+    "stopbits": "1",
+    "newline": "\\n",
+    "bin": "false",
+    "out": "char",
+    "addchar": false
+}]

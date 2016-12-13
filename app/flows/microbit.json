@@ -1,4 +1,8 @@
 [{
+    "id": "4719a036.2d961",
+    "type": "tab",
+    "label": "Microbit"
+}, {
     "id": "c104b867.e228b8",
     "type": "http request",
     "z": "4719a036.2d961",
@@ -169,7 +173,7 @@
     "name": "Write string",
     "method": "POST",
     "ret": "txt",
-    "url": "127.0.0.1:3000/v1/text/e4e3379dba1b/KITRACOM ON RESIN.IO",
+    "url": "127.0.0.1:3000/v1/text/e4e3379dba1b/KITRA ON RESIN.IO",
     "tls": "",
     "x": 410,
     "y": 320,
@@ -210,7 +214,7 @@
     "name": "Read temperature",
     "method": "GET",
     "ret": "txt",
-    "url": "127.0.0.1:3000/v1/temperature/e4e3379dba1b",
+    "url": "127.0.0.1:3000/v1/temperature/ff4f6666acff",
     "tls": "",
     "x": 430,
     "y": 380,
@@ -325,5 +329,46 @@
     "complete": "false",
     "x": 770,
     "y": 500,
+    "wires": []
+}, {
+    "id": "dae30da7.703e",
+    "type": "http request",
+    "z": "4719a036.2d961",
+    "name": "Write string",
+    "method": "POST",
+    "ret": "txt",
+    "url": "127.0.0.1:3000/v1/text/ff4f6666acff/KITRA ON RESIN.IO",
+    "tls": "",
+    "x": 410,
+    "y": 560,
+    "wires": [
+        ["cca5a194.a8738"]
+    ]
+}, {
+    "id": "98f6418c.ce9be",
+    "type": "inject",
+    "z": "4719a036.2d961",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "date",
+    "repeat": "",
+    "crontab": "",
+    "once": false,
+    "x": 110,
+    "y": 560,
+    "wires": [
+        ["dae30da7.703e"]
+    ]
+}, {
+    "id": "cca5a194.a8738",
+    "type": "debug",
+    "z": "4719a036.2d961",
+    "name": "",
+    "active": true,
+    "console": "false",
+    "complete": "false",
+    "x": 770,
+    "y": 560,
     "wires": []
 }]

@@ -1,4 +1,8 @@
 [{
+    "id": "bb84a7a2.4b7e28",
+    "type": "tab",
+    "label": "Device status via LED"
+}, {
     "id": "122edfb2.46212",
     "type": "inject",
     "z": "bb84a7a2.4b7e28",

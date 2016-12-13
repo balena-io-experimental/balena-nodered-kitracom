@@ -1,4 +1,8 @@
 [{
+    "id": "9cc05709.c67948",
+    "type": "tab",
+    "label": "Supervisor"
+}, {
     "id": "7b3c835.42a197c",
     "type": "device",
     "z": "9cc05709.c67948",
