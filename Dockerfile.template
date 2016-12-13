@@ -9,6 +9,8 @@ RUN apt-get update && apt-get install -y \
   hostapd \
   iproute2 \
   iw \
+  python-dev \
+  python-pip \
   libdbus-1-dev \
   libexpat-dev \
   rfkill \
