@@ -3,26 +3,27 @@
 {
     const ble = require(__dirname + '/libs/bluetooth.js');
     const server = require(__dirname + '/libs/server.js');
+    const enm = require(__dirname + '/libs/enm/helper.js');
     const spawn = require('child_process').spawn;
     const _ = require('lodash');
     let devicesRaw = [];
     let devices = [];
+    let provisionedDevices = [];
     let discoveryStatus = false;
-    let appCommit;
 
     // Start Node-RED
     const nodered = spawn('node-red', ['--settings', '/usr/src/app/settings.js']);
     nodered.stdout.on('data', (data) => {
-      "use strict";
-      console.log(`stdout: ${data}`);
+        "use strict";
+        console.log(`stdout: ${data}`);
     });
     nodered.stderr.on('data', (data) => {
-      "use strict";
-      console.log(`stderr: ${data}`);
+        "use strict";
+        console.log(`stderr: ${data}`);
     });
     nodered.on('close', (code) => {
-      "use strict";
-      console.log(`child process exited with code ${code}`);
+        "use strict";
+        console.log(`child process exited with code ${code}`);
     });
 
     ble.on("discover", (bbcmb) => {
@@ -68,7 +69,19 @@
             let microbit = _.find(devicesRaw, function(o) {
                 return o.id == id;
             });
+            let provisioned = _.find(provisionedDevices, function(o) {
+                return o.id == id;
+            });
             ble.connect(microbit, (device) => {
+                if (!provisioned) {
+                    enm.provision((data) => {
+                        provisionedDevices.push({
+                            uuid: data.uuid,
+                            id: microbit.id,
+                            address: microbit.address
+                        });
+                    });
+                }
                 res.status(200).send(microbit.id);
             });
         });

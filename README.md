@@ -6,6 +6,7 @@ a node-red application with [resin-supervisor](https://docs.resin.io/runtime/sup
 Variable Name | Default | Description
 ------------ | ------------- | -------------
 PORT | `80` | the port on which expose the Node-RED UI
+MICROBIT_PORT | `1337` | the port on which expose the BBC Micro:bit server
 USERNAME | `none` | the Node-RED admin username
 PASSWORD | `none` | the Node-REd admin password [hash](https://nodered.org/docs/security#generating-the-password-hash)
 
