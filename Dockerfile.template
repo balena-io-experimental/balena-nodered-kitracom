@@ -16,11 +16,27 @@ RUN apt-get update && apt-get install -y \
   bluez \
   libbluetooth-dev \
   libudev-dev \
+  libglib2.0-dev \
+  libdbus-1-dev \
+  libusb-dev \
+  libical-dev \
+  libreadline-dev \
+  libical-dev \
   && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --upgrade pip && pip install pexpect
 
 # Defines our working directory in container
 RUN mkdir -p /usr/src/app/
 WORKDIR /usr/src/app
+
+RUN wget https://www.kernel.org/pub/linux/bluetooth/bluez-5.43.tar.xz \
+    && tar xvf bluez-5.43.tar.xz
+
+WORKDIR /usr/src/app/bluez-5.43
+RUN ./configure --enable-library \
+    && make -j8 && sudo make install \
+    && cp attrib/gatttool /usr/local/bin/
 
 # Copies the package.json first for better cache on later pushes
 COPY ./app/package.json ./
