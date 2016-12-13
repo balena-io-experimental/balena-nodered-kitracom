@@ -16,18 +16,26 @@ RUN apt-get update && apt-get install -y \
   bluez \
   libbluetooth-dev \
   libudev-dev \
+  python-dev \
+  python-pip \
   && rm -rf /var/lib/apt/lists/*
 
 # Defines our working directory in container
 RUN mkdir -p /usr/src/app/
 WORKDIR /usr/src/app
 
+# Install nrfutil extension
+RUN cd /usr/src/app && git clone https://github.com/NordicSemiconductor/pc-nrfutil.git && \
+  git checkout 0_5_2 && python setup.py install
+
 # Copies the package.json first for better cache on later pushes
 COPY ./app/package.json ./
 
 # This install npm dependencies on the resin.io build server,
 # making sure to clean up the artifacts it creates in order to reduce the image size.
-RUN JOBS=MAX npm install --production --unsafe-perm && npm install -g node-red && npm install -g node-red-contrib-kitra install node-red-contrib-artik node-red-contrib-artik-cloud node-red-contrib-resinio && npm cache clean && rm -rf /tmp/*
+RUN JOBS=MAX npm install --production --unsafe-perm && npm install -g node-red && \
+  npm install -g node-red-contrib-kitra install node-red-contrib-artik node-red-contrib-artik-cloud node-red-contrib-resinio && \
+  npm cache clean && rm -rf /tmp/*
 
 # This will copy all files in our root to the working  directory in the container
 COPY ./app ./
