@@ -6,7 +6,7 @@
         "node-red-contrib-artik": "0.0.12",
         "node-red-contrib-artik-cloud": "^0.2.2",
         "node-red-contrib-kitra": "^0.1.2",
-        "node-red-contrib-resinio": "0.1.6",
+        "node-red-contrib-resinio": "0.1.7",
         "bbc-microbit": "^0.1.0",
         "body-parser": "^1.15.2",
         "compression": "^1.6.2",
