@@ -56,18 +56,18 @@
             self.emit("stopDiscovery", res);
         });
 
-        app.get('/v1/devices/', (req, res) => {
+        app.get('/v1/microbits/', (req, res) => {
             self.emit("devices", res);
         });
 
-        app.post('/v1/devices/:id', (req, res) => {
+        app.post('/v1/microbits/:id', (req, res) => {
             if (!req.params.id) {
                 return res.status(400).send('Bad Request');
             }
             self.emit("connect", req.params.id, res);
         });
 
-        app.delete('/v1/devices/:id', (req, res) => {
+        app.delete('/v1/microbits/:id', (req, res) => {
             if (!req.params.id) {
                 return res.status(400).send('Bad Request');
             }
