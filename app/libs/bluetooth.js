@@ -58,11 +58,15 @@
         });
     };
 
-    bluetooth.prototype.disconnect = function (microbit, callback) {
-      "use strict";
-      let self = this;
-      debug("disconnecting from device: ", microbit.id);
-      microbit.disconnect(callback);
+    bluetooth.prototype.disconnect = function(microbit, callback) {
+        "use strict";
+        let self = this;
+        if (microbit.id) {
+            debug("disconnecting from device: ", microbit.id);
+            microbit.disconnect(callback);
+        } else {
+            callback();
+        }
     };
 
     bluetooth.prototype.text = function(microbit, text, callback) {
