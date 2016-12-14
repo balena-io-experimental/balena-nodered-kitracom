@@ -96,6 +96,14 @@
         });
 
         // ENM
+
+        app.delete('/v1/devices/:uuid', (req, res) => {
+            if (!req.params.uuid) {
+                return res.status(400).send('Bad Request');
+            }
+            self.emit("delete", req.params.uuid, res);
+        });
+
         app.put('/v1/devices/:uuid', function(req, res) {
             if (!req.params.uuid) {
                 return res.status(400).send('Bad Request');
@@ -123,9 +131,8 @@
                 .pipe(destFile);
             destFile.on('finish', function() {
                 console.log(chalk.yellow('update downloaded as ' + '/data/' + req.body.commit + '.tar'));
-                self.emit('update',req.body.commit,req.params.uuid);
+                self.emit('update',req.body.commit,req.params.uuid,res);
             });
-            res.status(200).send('OK');
         });
 
         app.listen(self.port, '127.0.0.1', (req, res) => {

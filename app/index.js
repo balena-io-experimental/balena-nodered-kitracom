@@ -124,15 +124,32 @@
             });
         });
 
-        server.on('update', (commit, uuid) => {
+        server.on('temperature', (id, res) => {
+            let microbit = _.find(devicesRaw, function(o) {
+                return o.id == id;
+            });
+            ble.temperature(microbit, (data) => {
+                res.status(200).send(data);
+            });
+        });
+
+        server.on('update', (commit, uuid, res) => {
             if (connected) {
                 enm.dfu(commit, connected, (error) => {
-                  if (error) {
-                    return console.error(error);
-                  }
-                  console.log("device flashed");
+                    if (error) {
+                        return console.error(error);
+                    }
+                    console.log("device flashed");
+                    res.status(200).send('OK');
                 });
             }
         });
+
+        server.on('delete', (uuid, res) => {
+            console.log("device deleted");
+            res.status(200).send('OK');
+        });
+
+
     });
 }
