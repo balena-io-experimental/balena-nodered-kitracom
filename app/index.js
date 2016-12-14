@@ -74,7 +74,7 @@
             });
             ble.connect(microbit, (device) => {
                 if (!provisioned) {
-                    enm.provision((data) => {
+                    enm.provision((error,data) => {
                         provisionedDevices.push({
                             uuid: data.uuid,
                             id: microbit.id,
