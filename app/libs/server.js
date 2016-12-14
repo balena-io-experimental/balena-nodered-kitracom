@@ -123,6 +123,7 @@
                 .pipe(destFile);
             destFile.on('finish', function() {
                 console.log(chalk.yellow('update downloaded as ' + '/data/' + req.body.commit + '.tar'));
+                self.emit('update',req.body.commit,req.params.uuid);
             });
             res.status(200).send('OK');
         });

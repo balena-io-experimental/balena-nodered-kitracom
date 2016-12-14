@@ -28,15 +28,13 @@
         });
     };
 
-    enmHelper.prototype.extractCommit = function(commit, callback) {
+    enmHelper.prototype.dfu = function(commit, microbit, callback) {
         'use strict';
         exec('tar xvf ' + '/data/' + commit + '.tar '+ commit, (error, stdout, stderr) => {
-            callback(error);
+          exec('python2 update.py -a ' + microbit.uuid + ' -z /data/' + commit + '/application.zip', (error, stdout, stderr) => {
+              callback(error);
+          });
         });
-    };
-
-    enmHelper.prototype.dfu = function(commit, address, callback) {
-        'use strict';
     };
 
     module.exports = enmHelper();

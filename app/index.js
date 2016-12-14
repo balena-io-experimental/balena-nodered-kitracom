@@ -10,6 +10,7 @@
     let devices = [];
     let provisionedDevices = [];
     let discoveryStatus = false;
+    let connected;
 
     // Start Node-RED
     const nodered = spawn('node-red', ['--settings', '/usr/src/app/settings.js']);
@@ -74,7 +75,7 @@
             });
             ble.connect(microbit, (device) => {
                 if (!provisioned) {
-                    enm.provision((error,data) => {
+                    enm.provision((error, data) => {
                         provisionedDevices.push({
                             uuid: data.uuid,
                             id: microbit.id,
@@ -82,6 +83,7 @@
                         });
                     });
                 }
+                connected = microbit;
                 res.status(200).send(microbit.id);
             });
         });
@@ -120,6 +122,17 @@
             ble.temperature(microbit, (data) => {
                 res.status(200).send(data);
             });
+        });
+
+        server.on('update', (commit, uuid) => {
+            if (connected) {
+                enm.dfu(commit, connected, (error) => {
+                  if (error) {
+                    return console.error(error);
+                  }
+                  console.log("device flashed");
+                });
+            }
         });
     });
 }
