@@ -39,15 +39,12 @@ WORKDIR /usr/src/app/bluez-5.43
 RUN ./configure --enable-library \
     && make -j8 && sudo make install \
     && cp attrib/gatttool /usr/local/bin/
-WORKDIR /usr/src/app/
 
-# Copies the package.json first for better cache on later pushes
-COPY ./app/package.json ./
+WORKDIR /usr/src/app/
 
 # This install npm dependencies on the resin.io build server,
 # making sure to clean up the artifacts it creates in order to reduce the image size.
-RUN JOBS=MAX npm install --production --unsafe-perm && npm install -g node-red && \
-  npm install -g node-red-node-serialport node-red-contrib-kitra install node-red-contrib-artik node-red-contrib-artik-cloud node-red-contrib-resinio && \
+RUN JOBS=MAX npm install -g node-red node-red-node-serialport node-red-contrib-kitra install node-red-contrib-artik node-red-contrib-artik-cloud node-red-contrib-resinio && \
   npm cache clean && rm -rf /tmp/*
 
 # This will copy all files in our root to the working  directory in the container

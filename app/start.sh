@@ -6,5 +6,5 @@ export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 mkdir -p /data/node-red/user/lib/flows || true
 cp /usr/src/app/flows/* /data/node-red/user/lib/flows/
 
-# Start app
-node /usr/src/app/index.js
+# Start node-red
+node-red --settings /usr/src/app/settings.js
