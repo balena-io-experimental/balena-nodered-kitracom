@@ -1,0 +1,3 @@
+[submodule "app/flows/kitracom"]
+	path = app/flows/kitracom
+	url = git@github.com:rushup/node-red-contrib-kitra-examples.git
