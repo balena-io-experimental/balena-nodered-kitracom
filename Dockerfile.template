@@ -1,7 +1,7 @@
 # base-image for node on any machine using a template variable,
 # see more about dockerfile templates here:http://docs.resin.io/pages/deployment/docker-templates
 # Note the node:slim image doesn't have node-gyp
-FROM resin/%%RESIN_MACHINE_NAME%%-node:6
+FROM resin/%%RESIN_MACHINE_NAME%%-node:6.10.3
 
 # Install apt dependencies
 RUN apt-get update && apt-get install -y \
@@ -9,36 +9,14 @@ RUN apt-get update && apt-get install -y \
   hostapd \
   iproute2 \
   iw \
-  python-dev \
-  python-pip \
   libdbus-1-dev \
   libexpat-dev \
-  rfkill \
-  bluetooth \
-  bluez \
-  libbluetooth-dev \
-  libudev-dev \
-  libglib2.0-dev \
-  libdbus-1-dev \
-  libusb-dev \
-  libical-dev \
-  libreadline-dev \
-  libical-dev \
-  && rm -rf /var/lib/apt/lists/*
+  rfkill && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade pip && pip install pexpect
 
 # Defines our working directory in container
 RUN mkdir -p /usr/src/app/
-WORKDIR /usr/src/app
-
-RUN wget https://www.kernel.org/pub/linux/bluetooth/bluez-5.43.tar.xz \
-    && tar xvf bluez-5.43.tar.xz
-
-WORKDIR /usr/src/app/bluez-5.43
-RUN ./configure --enable-library \
-    && make -j8 && sudo make install \
-    && cp attrib/gatttool /usr/local/bin/
 
 WORKDIR /usr/src/app/
 
