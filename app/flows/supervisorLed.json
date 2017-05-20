@@ -20,8 +20,8 @@
   "z": "27dd0106.91ed5e",
   "name": "Kitracom",
   "serial": "846a8851.2dfd18",
-  "x": 1100,
-  "y": 247,
+  "x": 1267,
+  "y": 231,
   "wires": []
 }, {
   "id": "93eaf144.88333",
@@ -101,7 +101,7 @@
   "y": 247,
   "wires": [
     ["48281f3d.976e3"],
-    ["781df36d.d72b8c", "600716b.102dce8"]
+    ["781df36d.d72b8c", "74badf84.2c95f"]
   ]
 }, {
   "id": "48281f3d.976e3",
@@ -154,7 +154,7 @@
   "id": "600716b.102dce8",
   "type": "led_rgb_set_managed",
   "z": "27dd0106.91ed5e",
-  "name": "",
+  "name": "Blink LED 1 blue",
   "pin": "1",
   "effect": "1",
   "color_target": "4568A3",
@@ -163,10 +163,24 @@
   "loop": "0",
   "loop_delay": "0",
   "autostart": "true",
-  "x": 847,
-  "y": 284,
+  "x": 1098,
+  "y": 274,
   "wires": [
     ["bfbc0c7f.b2758"]
+  ]
+}, {
+  "id": "74badf84.2c95f",
+  "type": "led_rgb_set",
+  "z": "27dd0106.91ed5e",
+  "name": "Downloading, set LED 1 off",
+  "pin": "1",
+  "color": "000000",
+  "intensity": "0",
+  "autostart": "true",
+  "x": 868,
+  "y": 275,
+  "wires": [
+    ["600716b.102dce8"]
   ]
 }, {
   "id": "846a8851.2dfd18",

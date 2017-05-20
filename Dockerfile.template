@@ -13,8 +13,6 @@ RUN apt-get update && apt-get install -y \
   libexpat-dev \
   rfkill && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --upgrade pip && pip install pexpect
-
 # Defines our working directory in container
 RUN mkdir -p /usr/src/app/
 
